@@ -8,6 +8,8 @@ Run this example app on Linux. Click one of the two buttons on screen and the ap
 
 This code uses an svg I found while testing that easily reproduces the crash, but I have noticed other random crashes so I assume the bug is not just with this svg.
 
+The code tests both jovial_svg and flutter_svg.
+
 // -----------------------------------------------
 
 Tested on these builds of Flutter and they both have the bug.
