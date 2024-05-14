@@ -57,40 +57,40 @@ class _MyHomePageState extends State<MyHomePage> {
     rendered.dispose();
     pict.dispose();
 
+    print(r.length);
+
     return r;
   }
 
-  void _useFlutterSvg() async {
-    try {
-      final PictureInfo pictureInfo = await vg.loadPicture(
-        const SvgNetworkLoader('https://docs.gtk.org/gtk3/gtk-logo.svg'),
-        null,
-        onError: (error, stackTrace) {
-          print(error);
-          print(stackTrace);
-        },
-      );
+  Future<Uint8List> _useFlutterSvg() async {
+    final PictureInfo pictureInfo = await vg.loadPicture(
+      const SvgNetworkLoader('https://docs.gtk.org/gtk3/gtk-logo.svg'),
+      null,
+      onError: (error, stackTrace) {
+        print(error);
+        print(stackTrace);
+      },
+    );
 
-      final recorder = PictureRecorder();
-      final Canvas c = Canvas(recorder);
+    final recorder = PictureRecorder();
+    final Canvas c = Canvas(recorder);
 
-      c.drawPicture(pictureInfo.picture);
-      pictureInfo.picture.dispose();
+    c.drawPicture(pictureInfo.picture);
+    pictureInfo.picture.dispose();
 
-      final Picture pict = recorder.endRecording();
-      final rendered = await pict.toImage(
-          pictureInfo.size.width.toInt(), pictureInfo.size.height.toInt());
+    final Picture pict = recorder.endRecording();
+    final rendered = await pict.toImage(
+        pictureInfo.size.width.toInt(), pictureInfo.size.height.toInt());
 
-      final ByteData? bd =
-          await rendered.toByteData(format: ImageByteFormat.png);
+    final ByteData? bd = await rendered.toByteData(format: ImageByteFormat.png);
+    final r = Uint8List.fromList(bd!.buffer.asUint8List());
 
-      rendered.dispose();
-      pict.dispose();
+    rendered.dispose();
+    pict.dispose();
 
-      print(bd?.lengthInBytes);
-    } catch (err) {
-      print(err);
-    }
+    print(r.length);
+
+    return r;
   }
 
   @override
@@ -105,12 +105,15 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'Crashes on Linux, but not Web.  I didn\'t test the others',
+              'Crashes on Flutter 3.22 Linux, but not Web.\nI did not test Windows or macOS',
+              style: TextStyle(fontSize: 22),
             ),
+            const SizedBox(height: 40),
             ElevatedButton(
-                onPressed: _useJovial, child: const Text('Use Jovial')),
+                onPressed: _useJovial, child: const Text('Crash #1')),
+            const SizedBox(height: 20),
             ElevatedButton(
-                onPressed: _useFlutterSvg, child: const Text('Use Jovial')),
+                onPressed: _useFlutterSvg, child: const Text('Crash #2')),
           ],
         ),
       ),
