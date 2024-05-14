@@ -28,6 +28,11 @@ Tools • Dart 3.4.0 (build 3.4.0-282.3.beta) • DevTools 2.34.3
 
 // -----------------------------------------------
 
+$ uname -a
+Linux 5950x 6.1.0-20-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.85-1 (2024-04-11) x86_64 GNU/Linux
+
+// -----------------------------------------------
+
 $ flutter doctor -v
 [✓] Flutter (Channel stable, 3.22.0, on Debian GNU/Linux 12 (bookworm) 6.1.0-20-amd64, locale en_US.UTF-8)
 • Flutter version 3.22.0 on channel stable at /home/steve/development/flutter
